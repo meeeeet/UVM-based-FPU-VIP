@@ -81,9 +81,14 @@ always @(*) begin
           n_sum=aligned_a-aligned_b;
           n_sign=a_sign;
         end
-        else begin
+        else if(a_mantissa<b_mantissa)begin
           n_sum=aligned_b-aligned_a;
           n_sign=b_sign;
+        end
+        else begin
+          n_sum=25'b1_00000000_00000000_00000000;
+          n_sign=0;
+          n_exp=-1;
         end
       end
     end
@@ -117,6 +122,7 @@ always @ (*) begin
     else begin
       o_e=o_e;
       o_m=o_m;
+      // $display("[else] i=%d mantisaa=%b exp=%b sign=%b",i,o_m,o_e,sign);
     end
   end
 end
