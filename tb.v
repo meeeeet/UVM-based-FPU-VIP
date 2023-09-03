@@ -1,31 +1,50 @@
-`include "adder.v"
-`include "multiplication.v"
+`include "fpu.v"
+
 module top;
 
     reg [31:0]a;
     reg [31:0]b;
-    wire [31:0]sum;
+    reg clk=0;
+    reg [1:0]opcode;
+    wire [31:0]out;
     reg [22:0] sum1;
     reg [46:0]n_mul;
 
-    multiplication dut(a,b,sum);
+    fpu dut(a,b,opcode,clk,out);
+
+    initial forever #1 clk=~clk;
 
     initial begin
-        
-        b=32'h0x41202960;
-        // a=32'h0x40a00000;
-        a=b;
-        // a=32'h0x41200000;
-        n_mul=23'd10 * 23'd01;
+        a=32'h3f800000;
+        b=32'h40000000;
+        @(negedge clk);
+        opcode=`ADD;
+        @(posedge clk);
+        $display("a=%h   b=%h  a+b=%h",a,b,out);
 
-        // a=32'h40080000;
-        // b=32'h40080000;
-        #1
-        // sum1=sum[23:0];
+        @(negedge clk);
+        opcode=`SUB;
+        @(posedge clk);
+        $display("a=%h   b=%h  a-b=%h",a,b,out);
 
-        // $display("Sum= %b %h",sum1,sum1);
-        $display("a_m * b_m = %b  %h",n_mul,n_mul);
-        $display("a=%b   b=%b  Out=%b %h",a,b,sum,sum);
+        @(negedge clk);
+        opcode=`MUL;
+        @(posedge clk);
+        $display("a=%h   b=%h  a*b=%h",a,b,out);
+
+        @(negedge clk);
+        opcode=`DIV;
+        @(posedge clk);
+        $display("a=%h   b=%h  a/b=%h",a,b,out);
+        @(posedge clk);
         $finish;
+
+
+    end
+
+    initial begin
+        $dumpfile("wave.vcd");
+        $dumpvars();
+
     end
 endmodule
