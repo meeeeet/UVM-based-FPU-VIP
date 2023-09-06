@@ -15,8 +15,9 @@ module top;
     initial forever #1 clk=~clk;
 
     initial begin
-        a=32'h3f800000;
-        b=32'h40000000;
+        a=32'h3f800000; //10
+        b=32'h41200000; //2.5
+
         @(negedge clk);
         opcode=`ADD;
         @(posedge clk);
@@ -30,16 +31,9 @@ module top;
         @(negedge clk);
         opcode=`MUL;
         @(posedge clk);
+        @(posedge clk);
         $display("a=%h   b=%h  a*b=%h",a,b,out);
-
-        @(negedge clk);
-        opcode=`DIV;
-        @(posedge clk);
-        $display("a=%h   b=%h  a/b=%h",a,b,out);
-        @(posedge clk);
         $finish;
-
-
     end
 
     initial begin

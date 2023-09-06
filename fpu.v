@@ -1,11 +1,11 @@
 `include "adder.v"
 `include "multiplication.v"
-`include "division.v"
+
 
 `define ADD 2'b00
 `define SUB 2'b01
 `define MUL 2'b10
-`define DIV 2'b11
+`define DIV 2'b11  //not implemented yet.....
 
 module fpu(
     input [31:0] A,
@@ -39,11 +39,11 @@ multiplication m1(
     .res(mul_result)
 );
 
-division d1(
-    .a(A),
-    .b(B),
-    .res(div_result)
-);
+// division d1(
+//     .a(A),
+//     .b(B),
+//     .res(div_result)
+// );
 
 always @(posedge clk) begin
     case (opcode)

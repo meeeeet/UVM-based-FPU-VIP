@@ -29,9 +29,11 @@ reg [7:0] n_exp;
 normal_div nd1(n_mul,n_exp,n_sign,res);
 
 always @(*) begin
+    $display("[div] a=%b exp=%b b=%b exp=%b",a_mantissa,a_exponent,b_mantissa,b_exponent);
     n_sign=a_sign^b_sign;
     n_exp=a_exponent-b_exponent+8'd127;
     n_mul=a_mantissa/b_mantissa;
+    $display("[div] div=%b  %h exp=%b",n_mul,n_mul,n_exp);
 end
 
 endmodule
@@ -44,7 +46,7 @@ module normal_div(
   );
   
   assign out[31]=sign;
-  assign out[30:23]=o_e+1;
+  assign out[30:23]=o_e;
   assign out[22:0]=o_m[46:24];
   reg [7:0]o_e;
   reg [47:0]o_m;
@@ -54,10 +56,11 @@ module normal_div(
     o_e=exponent;
     o_m=mantissa;
   
-    for (int i=47; i>0; i=i-1) begin
+    for (int i=47; i>=0; i=i-1) begin
       if (o_m[47]==0) begin
         o_e=o_e-1;
         o_m=o_m<<1;
+        $display("[div_nor] %d man=%b exp=%b",i,o_m,o_e);
       end
       else begin
         o_e=o_e;
@@ -65,5 +68,5 @@ module normal_div(
       end
     end
   end
-  endmodule
-  
+
+endmodule
