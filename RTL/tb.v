@@ -1,5 +1,5 @@
 `include "RTL/fpu.v"
-`define cases 10
+`define cases 1000000
 
 module top;
 
