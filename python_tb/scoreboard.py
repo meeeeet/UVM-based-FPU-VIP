@@ -12,9 +12,6 @@ output_file_sum = result_folder+'difference_sum.log'
 IEEE754.remove_lines_with_pattern(file1_sum, "// 0x0")
 IEEE754.remove_lines_with_pattern(file1_sub, "// 0x0")
 
-
 IEEE754.find_differences(file1_sum, file2_sum, output_file_sum)
-
-
 
 IEEE754.find_differences(file1_sub, file2_sub, output_file_sub)
