@@ -56,9 +56,9 @@ always @(posedge clk) begin
         `MUL: begin
             OUT<=mul_result;
         end
-        `DIV: begin
-            OUT<=div_result;
-        end
+        // `DIV: begin
+        //     OUT<=div_result;
+        // end
         default: begin
             OUT<=32'd0;
         end
