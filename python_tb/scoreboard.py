@@ -1,18 +1,20 @@
-from ieee754_converter import IEEE754Converter
+from base import IEEE754
 
-result_folder = "python_tb/test"
+result_folder = "python_tb/test/"
 
-IEEE754Converter.remove_lines_with_pattern("M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/actual_result_sum.mem", "// 0x0")
-IEEE754Converter.remove_lines_with_pattern("M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/actual_result_sub.mem", "// 0x0")
+file1_sub = result_folder+'actual_result_sub.mem'    # from RTL
+file2_sub = result_folder+'expected_result_sub.mem'  # from test_generator
+output_file_sub = result_folder+'difference_sub.log'
+file1_sum = result_folder+'actual_result_sum.mem'    # from RTL
+file2_sum = result_folder+'expected_result_sum.mem'  # from test_generator
+output_file_sum = result_folder+'difference_sum.log'
 
-file1_sum = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/actual_result_sum.mem'    # from RTL
-file2_sum = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/expected_result_sum.mem'  # from test_generator
-output_file_sum = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/difference_sum.log'
+IEEE754.remove_lines_with_pattern(file1_sum, "// 0x0")
+IEEE754.remove_lines_with_pattern(file1_sub, "// 0x0")
 
-IEEE754Converter.find_differences(file1_sum, file2_sum, output_file_sum)
 
-file1_sub = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/actual_result_sub.mem'    # from RTL
-file2_sub = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/expected_result_sub.mem'  # from test_generator
-output_file_sub = 'M:/GitHub/IEEE-754-single-precision-FPU/python_tb/test/difference_sub.log'
+IEEE754.find_differences(file1_sum, file2_sum, output_file_sum)
 
-IEEE754Converter.find_differences(file1_sub, file2_sub, output_file_sub)
+
+
+IEEE754.find_differences(file1_sub, file2_sub, output_file_sub)

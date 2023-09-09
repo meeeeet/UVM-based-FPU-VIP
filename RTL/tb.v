@@ -1,5 +1,5 @@
-`include "fpu.v"
-`define cases 100000
+`include "RTL/fpu.v"
+`define cases 10
 
 module top;
 
@@ -22,9 +22,10 @@ module top;
     initial forever #1 clk = ~clk;
 
     initial begin
+        
         $display("Reading test data from file...");
-        $readmemh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\test_1.mem", a);
-        $readmemh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\test_2.mem", b);
+        $readmemh("python_tb/test/test_1.mem", a);
+        $readmemh("python_tb/test/test_2.mem", b);
         opcode = `ADD;
 
         $display("Simulation started.");
@@ -49,14 +50,13 @@ module top;
             actual_out_sub[i] = out;
         end
 
-        $writememh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\actual_result_sum.mem", actual_out_sum);
-        $writememh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\actual_result_sub.mem", actual_out_sub);
-        $display("Simulation completed.");
+        // $writememh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\actual_result_sum.mem", actual_out_sum);
+        // $writememh("M:\\GitHub\\IEEE-754-single-precision-FPU\\python_tb\\test\\actual_result_sub.mem", actual_out_sub);
+
+        $writememh("python_tb/test/actual_result_sum.mem", actual_out_sum);
+        $writememh("python_tb/test/actual_result_sub.mem", actual_out_sub);
+        $display("Simulation completed.........");
         $finish;
     end
 
-    // initial begin
-    //     $dumpfile("wave.vcd");
-    //     $dumpvars();
-    // end
 endmodule

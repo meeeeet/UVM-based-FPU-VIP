@@ -1,5 +1,5 @@
-`include "adder.v"
-`include "multiplication.v"
+`include "RTL/adder.v"
+`include "RTL/multiplication.v"
 
 
 `define ADD 2'b00

@@ -2,7 +2,7 @@ import struct
 import random
 import filecmp
 
-class IEEE754Converter:
+class IEEE754:
     def __init__(self, array):
         self.array = array
 
@@ -36,7 +36,7 @@ class IEEE754Converter:
     def random_float(size):
         ieee754_numbers = []
         for _ in range(size):
-            number = random.uniform(-1000000, 1000000)
+            number = random.uniform(-100.0, 100.0)
             ieee754_numbers.append(round(number, 20))
         return ieee754_numbers
     
@@ -103,12 +103,12 @@ class IEEE754Converter:
 
         with open(output_file, 'w') as output:
             for i, (line1, line2) in enumerate(zip(file1_lines, file2_lines), start=1):
-                if not IEEE754Converter.compare_first_8_digits(line1, line2):
-                    file1_float = IEEE754Converter.convert_hex_to_float(line1.strip())
-                    file2_float = IEEE754Converter.convert_hex_to_float(line2.strip())
+                if not IEEE754.compare_first_8_digits(line1, line2):
+                    file1_float = IEEE754.convert_hex_to_float(line1.strip())
+                    file2_float = IEEE754.convert_hex_to_float(line2.strip())
 
                     difference = file1_float - file2_float
-                    percentage_error = IEEE754Converter.calculate_percentage_error(file1_float, file2_float)
+                    percentage_error = IEEE754.calculate_percentage_error(file1_float, file2_float)
                     
                     output.write(f"@[{i}] Hex:  {line1.strip()}   {line2.strip()}\n")
                     output.write(f"    Float Values: {file1_float:.20f}  {file2_float:.20f}\n")
@@ -127,9 +127,8 @@ class IEEE754Converter:
         
         if percentage_errors:
             average_error = sum(percentage_errors) / len(percentage_errors)
-            average_error_message = f"Average %Error across differences: {average_error:.10f}%"
+            average_error_message = f"Average %Error of {i} cases: {average_error:.10f}%"
             print(average_error_message)  # Center the message in an 80-character wide line
         else:
             print("No %Error values found in the log file.")
-        
 
