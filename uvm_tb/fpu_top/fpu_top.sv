@@ -14,9 +14,10 @@ import uvm_pkg::*;
 `include "fpu_environment.sv"
 `include "fpu_test.sv"
 
+/* ------------------------------- top module ------------------------------- */
 module top;
 
-    logic clk;
+    bit clk=0;
 
     fpu_if top_if(clk);
 
@@ -28,18 +29,16 @@ module top;
         .OUT(top_if.out)
     );
 
-/* ---------------------------- clock generation ---------------------------- */
+//clock generation
     initial forever #1 clk=~clk;
 
-/* --------------------------- configure database --------------------------- */
  	initial begin
-        uvm_config_db #(virtual fpu_if) :: set(null,"*","fpu_vif",top_if);
-        `uvm_info("TOP","Configured database for interface.......",UVM_LOW)
+      uvm_config_db #(virtual fpu_if) :: set(null,"*","fpu_vif",top_if);
+      `uvm_info("TOP","Configured database for interface.......",UVM_LOW)
     end
 
-/* -------------------------------- run test -------------------------------- */
     initial begin
-        run_test();
+      run_test("fpu_test");
     end
 
 endmodule

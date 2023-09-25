@@ -1,5 +1,6 @@
 class fpu_env extends uvm_env;
     `uvm_component_utils(fpu_env)
+  	fpu_agent agent;
 
 /* ------------------------------- constructor ------------------------------ */
     function new(string name="fpu_env",uvm_component parent);
@@ -11,6 +12,7 @@ class fpu_env extends uvm_env;
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         `uvm_info(get_name(), "Inside build phase", UVM_LOW)
+      	agent=fpu_agent::type_id::create("agent",this);
     endfunction: build_phase
 
 /* ------------------------------ connect_phase ----------------------------- */
