@@ -57,6 +57,6 @@ module top;
         $writememh("python_tb/test/actual_result_sub.mem", actual_out_sub);
         $display("Simulation completed.........");
         $finish;
-    end
+    end 
 
 endmodule
