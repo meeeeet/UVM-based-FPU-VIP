@@ -12,11 +12,10 @@ class fpu_monitor extends uvm_monitor;
 
   function void build_phase(uvm_phase phase);
       super.build_phase(phase);
-//       `uvm_info(get_name(), "Inside build phase", UVM_HIGH)
-//     	//monitor_port = new("monitor_port", this);
+      `uvm_info(get_name(), "Inside build phase", UVM_HIGH)
 
-//       if(!(uvm_config_db #(virtual fpu_if)::get(this,"*","fpu_vif",fpu_vif)))
-//         `uvm_error(get_name(), "Faild to get Virtual IF from database...")  
+      if(!(uvm_config_db #(virtual fpu_if)::get(this,"*","fpu_vif",fpu_vif)))
+        `uvm_error(get_name(), "Faild to get Virtual IF from database...")  
         
   endfunction: build_phase
 
@@ -28,32 +27,25 @@ class fpu_monitor extends uvm_monitor;
   task run_phase(uvm_phase phase);
       super.run_phase(phase);
       `uvm_info(get_name(), "Inside run phase", UVM_HIGH)
-//       forever begin
-//         item=fpu_sequence_item::type_id::create("item");
-//         //sample inputs and output
-//         @(negedge fpu_vif.clk);
-//         item.a=fpu_vif.a;
-//         item.b=fpu_vif.b;
-//         item.opcode=fpu_vif.opcode;
-//         item.out=fpu_vif.out;
-//         //print(item);
-//         //save(item);
-// //         $writememh("test_a.mem",test_a);
-// //         $writememh("test_b.mem",test_b);
-// //         $writememh("test_opcode.mem",test_opcode);
-// //         $writememh("test_o.mem",test_o);
-//       end
+      forever begin
+        item=fpu_sequence_item::type_id::create("item");
+        sample(item);
+        item.print();
+      end
   endtask
 
   task print(fpu_sequence_item item);
   `uvm_info(get_name(),$sformatf("Received data: %b %b %b",item.a,item.b,item.opcode),UVM_LOW)
 endtask
 
-//     task save(fpu_sequence_item item);
-//       test_a[i]=item.a;
-//       test_b[i]=item.b;
-//       test_opcode[i]=item.opcode;
-//       test_o[i]=item.out;
-//   	endtask
+  task sample(fpu_sequence_item item);
+    wait(!vif.rst_n);
+    @(posedge vif.rdy);
+    #1;
+    item.cmd<=vif.cmd;
+    item.din1<=vif.din1;
+    item.din2<=vif.din2;
+    item.result<=vif.result;
+  endtask
 
 endclass: fpu_monitor

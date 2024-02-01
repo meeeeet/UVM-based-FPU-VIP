@@ -42,5 +42,5 @@ module top;
 endmodule
 
 /**
-* TODO: Add constrain in seq_item
+* TODO: Fetch updated tb from EDAPlayground
 */

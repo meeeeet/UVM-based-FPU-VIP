@@ -5,6 +5,4 @@ class fpu_sequencer extends uvm_sequencer #(fpu_sequence_item);
         super.new(name,parent);
         `uvm_info("fpu_sequencer", "Inside constructor of fpu_sequencer", UVM_HIGH)
     endfunction
-
-
 endclass: fpu_sequencer

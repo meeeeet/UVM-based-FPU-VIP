@@ -15,13 +15,11 @@ class fpu_env extends uvm_env;
     	scb=fpu_scoreboard::type_id::create("scb",this);
     endfunction: build_phase
 
-
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
         `uvm_info(get_name(), "Inside connect phase", UVM_HIGH)
           //agent.mon.monitor_port.connect(scb.scoreboard_port);
     endfunction
-
 
     task run_phase(uvm_phase phase);
         super.run_phase(phase);
