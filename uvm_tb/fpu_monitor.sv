@@ -1,6 +1,6 @@
 class fpu_monitor extends uvm_monitor;
   `uvm_component_utils(fpu_monitor)
-  virtual fpu_if fpu_vif;
+  virtual fpu_if vif;
   fpu_sequence_item item;
 
 //   uvm_analysis_port #(fpu_sequence_item) monitor_port;
@@ -14,7 +14,7 @@ class fpu_monitor extends uvm_monitor;
       super.build_phase(phase);
       `uvm_info(get_name(), "Inside build phase", UVM_HIGH)
 
-      if(!(uvm_config_db #(virtual fpu_if)::get(this,"*","fpu_vif",fpu_vif)))
+      if(!(uvm_config_db #(virtual fpu_if)::get(this,"*","fpu_vif",vif)))
         `uvm_error(get_name(), "Faild to get Virtual IF from database...")  
         
   endfunction: build_phase
@@ -27,16 +27,15 @@ class fpu_monitor extends uvm_monitor;
   task run_phase(uvm_phase phase);
       super.run_phase(phase);
       `uvm_info(get_name(), "Inside run phase", UVM_HIGH)
+
       forever begin
         item=fpu_sequence_item::type_id::create("item");
         sample(item);
         item.print();
       end
+      
   endtask
 
-  task print(fpu_sequence_item item);
-  `uvm_info(get_name(),$sformatf("Received data: %b %b %b",item.a,item.b,item.opcode),UVM_LOW)
-endtask
 
   task sample(fpu_sequence_item item);
     wait(!vif.rst_n);

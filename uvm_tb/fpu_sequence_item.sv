@@ -1,5 +1,4 @@
 class fpu_sequence_item extends uvm_sequence_item;
-    `uvm_object_utils(fpu_sequence_item)
 
   rand logic rst_n;
   rand logic [3:0] cmd;
@@ -29,7 +28,7 @@ class fpu_sequence_item extends uvm_sequence_item;
 
   constraint din1_range{
     if(!(cmd==4'b0101)) {
-      din1[30:23]<=8'd254;  //For excluding Inf and NaN
+      din1[30:23]<=8'd254;
       din1[30:23]>8'd0;
     }
     else{
@@ -38,7 +37,7 @@ class fpu_sequence_item extends uvm_sequence_item;
   }
 
   constraint din2_range{
-    din1[30:23]<=8'd254;  //For excluding Inf and NaN
+    din1[30:23]<=8'd254; 
     din1[30:23]>8'd0;
   }
 

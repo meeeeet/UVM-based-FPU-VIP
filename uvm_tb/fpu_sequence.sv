@@ -1,5 +1,5 @@
 class fpu_base_sequence extends uvm_sequence;
-  `uvm_object_utils(fpu_sequence)
+  `uvm_object_utils(fpu_base_sequence)
   fpu_sequence_item fpu_item;
 
   function new(string name="fpu_sequence");
@@ -9,7 +9,7 @@ class fpu_base_sequence extends uvm_sequence;
 endclass: fpu_base_sequence
 
 //RESET SEQUENCE
-class fpu_rst_seq extends fpu_base_sequence
+class fpu_rst_seq extends fpu_base_sequence;
 
   `uvm_object_utils(fpu_rst_seq)
   fpu_sequence_item item;
@@ -19,7 +19,7 @@ class fpu_rst_seq extends fpu_base_sequence
   endfunction
 
   task body();
-    `uvm_info(get_name(),"Running reset sequence...",UVM_LOW);
+    `uvm_info(get_name(),"Running reset sequence...",UVM_MEDIUM);
 
     item=fpu_sequence_item::type_id::create("item");
     start_item(item);
@@ -30,7 +30,7 @@ class fpu_rst_seq extends fpu_base_sequence
 endclass
 
 //MAIN SEQUENCE
-class fpu_main_seq extends fpu_base_sequence
+class fpu_main_seq extends fpu_base_sequence;
 
   `uvm_object_utils(fpu_main_seq)
   fpu_sequence_item item;
@@ -40,7 +40,7 @@ class fpu_main_seq extends fpu_base_sequence
   endfunction
 
   task body();
-    `uvm_info(get_name(),"Running main sequence...",UVM_LOW);
+    `uvm_info(get_name(),"Running main sequence...",UVM_MEDIUM);
 
     item=fpu_sequence_item::type_id::create("item");
     start_item(item);

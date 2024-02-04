@@ -31,8 +31,8 @@ class fpu_test extends uvm_test;
         rst_seq=fpu_rst_seq::type_id::create("rst_seq");
         rst_seq.start(env.agent.seqr);
       end
-      repeat(100) begin
-        main_seq=fpu_rst_seq::type_id::create("main_seq");
+      repeat(10) begin
+        main_seq=fpu_main_seq::type_id::create("main_seq");
         main_seq.start(env.agent.seqr);
       end
 
