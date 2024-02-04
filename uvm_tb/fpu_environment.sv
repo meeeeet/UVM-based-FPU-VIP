@@ -18,7 +18,7 @@ class fpu_env extends uvm_env;
     function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
         `uvm_info(get_name(), "Inside connect phase", UVM_HIGH)
-          //agent.mon.monitor_port.connect(scb.scoreboard_port);
+      agent.mon.mon_port.connect(scb.scb_port);
     endfunction
 
     task run_phase(uvm_phase phase);

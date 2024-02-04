@@ -22,7 +22,7 @@ class fpu_driver extends uvm_driver #(fpu_sequence_item);
       super.run_phase(phase);
       `uvm_info(get_name(), "Inside run phase", UVM_HIGH)
     
-    repeat(1) begin
+    repeat(2) begin
       item=fpu_sequence_item::type_id::create("item");
       seq_item_port.get_next_item(item);
       init_drive(item);
@@ -41,6 +41,7 @@ class fpu_driver extends uvm_driver #(fpu_sequence_item);
 
 
 task drive(fpu_sequence_item item);
+  `uvm_info(get_name(),"Drive....",UVM_MEDIUM)
   @(negedge vif.rdy);
   vif.rst_n<=item.rst_n;
   vif.cmd<=item.cmd;
@@ -50,6 +51,7 @@ task drive(fpu_sequence_item item);
 endtask
 
 task init_drive(fpu_sequence_item item);
+  `uvm_info(get_name(),"Init Drive....",UVM_MEDIUM)
   @(posedge vif.clk);
   vif.rst_n<=item.rst_n;
   vif.cmd<=item.cmd;

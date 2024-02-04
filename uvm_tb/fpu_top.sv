@@ -1,27 +1,19 @@
 `timescale 1ns/1ns
 `include "uvm_macros.svh"
+`include "fpu_def.sv"
 import uvm_pkg::*;
 
-`include "fpu_sp_top.sv"
-`include "fpu_interface.sv"
-`include "fpu_sequence_item.sv"
-`include "fpu_sequence.sv"
-`include "fpu_sequencer.sv"
-`include "fpu_driver.sv"
-`include "fpu_scoreboard.sv"
-`include "fpu_monitor.sv"
-`include "fpu_agent.sv"
-`include "fpu_environment.sv"
-`include "fpu_test.sv"
 
 module top;
 
     bit clk=0;
 
     fpu_if top_if(clk);
+  
+  import "DPI-C" function int floatOperations(int op1, int op2, int cmd);
 
   fpu_sp_top dut (
-    .clk      (top_if.clk      ),
+    	.clk      (top_if.clk      ),
       .rst_n    (top_if.rst_n    ),
       .din1     (top_if.din1     ),
       .cmd(top_if.cmd),
@@ -50,3 +42,4 @@ module top;
   end
 
 endmodule
+// TODO: Receiving items from monitor in scoreboard
