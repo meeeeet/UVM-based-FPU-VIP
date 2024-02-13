@@ -41,8 +41,8 @@ class fpu_driver extends uvm_driver #(fpu_sequence_item);
 
 
 task drive(fpu_sequence_item item);
-  `uvm_info(get_name(),"Drive....",UVM_MEDIUM)
-  @(negedge vif.rdy);
+  `uvm_info(get_name(),"Drive...",UVM_HIGH)
+  @(posedge vif.rdy);
   vif.rst_n<=item.rst_n;
   vif.cmd<=item.cmd;
   vif.din1<=item.din1;
@@ -51,8 +51,8 @@ task drive(fpu_sequence_item item);
 endtask
 
 task init_drive(fpu_sequence_item item);
-  `uvm_info(get_name(),"Init Drive....",UVM_MEDIUM)
-  @(posedge vif.clk);
+  `uvm_info(get_name(),"Init Drive...",UVM_HIGH)
+  @(negedge vif.clk);
   vif.rst_n<=item.rst_n;
   vif.cmd<=item.cmd;
   vif.din1<=item.din1;

@@ -9,8 +9,6 @@ module top;
     bit clk=0;
 
     fpu_if top_if(clk);
-  
-  import "DPI-C" function int floatOperations(int op1, int op2, int cmd);
 
   fpu_sp_top dut (
     	.clk      (top_if.clk      ),
@@ -29,7 +27,7 @@ module top;
 
  	initial begin
       uvm_config_db #(virtual fpu_if) :: set(null,"*","fpu_vif",top_if);
-      `uvm_info("TOP","Configured database for interface.......",UVM_LOW)
+      `uvm_info("TOP","Configured database for interface...",UVM_LOW)
     end
 
     initial begin
@@ -37,7 +35,7 @@ module top;
     end
   
   initial begin
-    $dumpfile("wave.vcd");
+    $dumpfile("waveform.vcd");
     $dumpvars;
   end
 

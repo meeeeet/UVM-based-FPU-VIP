@@ -65,10 +65,11 @@ fpu_sp_top u_fpu_sp_add (
 // end
 
 initial begin
-    din1=32'h41400000;
-    din2=32'h40c00000;
+    din1=32'h943138b8;
+    din2=32'had3e00f5;
     dval=1;
     cmd=4'b0001;
+    @(negedge rdy);
     @(negedge rdy);
     cmd=cmd+1;
     @(negedge rdy);

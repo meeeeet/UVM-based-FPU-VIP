@@ -19,7 +19,7 @@ class fpu_rst_seq extends fpu_base_sequence;
   endfunction
 
   task body();
-    `uvm_info(get_name(),"Running reset sequence...",UVM_MEDIUM);
+    `uvm_info(get_name(),"Running reset sequence...",UVM_HIGH);
 
     item=fpu_sequence_item::type_id::create("item");
     start_item(item);
@@ -40,7 +40,7 @@ class fpu_main_seq extends fpu_base_sequence;
   endfunction
 
   task body();
-    `uvm_info(get_name(),"Running main sequence...",UVM_MEDIUM);
+    `uvm_info(get_name(),"Running main sequence...",UVM_HIGH);
 
     item=fpu_sequence_item::type_id::create("item");
     start_item(item);

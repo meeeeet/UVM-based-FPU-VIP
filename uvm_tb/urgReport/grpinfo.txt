@@ -1,0 +1,54 @@
+Group : $unit::fpu_scoreboard::cg
+
+===============================================================================
+Group : $unit::fpu_scoreboard::cg
+===============================================================================
+SCORE  WEIGHT GOAL   AT LEAST AUTO BIN MAX PRINT MISSING 
+100.00 1      100    1        64           64            
+
+
+Source File(s) : 
+
+/home/runner/fpu_scoreboard.sv
+
+
+
+-------------------------------------------------------------------------------
+
+Summary for Group   $unit::fpu_scoreboard::cg
+
+
+
+CATEGORY  EXPECTED UNCOVERED COVERED PERCENT 
+Variables 5        0         5       100.00  
+
+
+Variables for Group  $unit::fpu_scoreboard::cg
+
+
+VARIABLE EXPECTED UNCOVERED COVERED PERCENT GOAL WEIGHT AT LEAST AUTO BIN MAX COMMENT 
+c1       5        0         5       100.00  100  1      5        0                    
+
+
+-------------------------------------------------------------------------------
+
+Summary for Variable c1
+
+
+CATEGORY          EXPECTED UNCOVERED COVERED PERCENT 
+User Defined Bins 5        0         5       100.00  
+
+
+User Defined Bins for c1
+
+
+Bins
+
+NAME    COUNT AT LEAST 
+i2f     34    5        
+f2i     29    5        
+div     27    5        
+mul     27    5        
+add_sub 33    5        
+
+

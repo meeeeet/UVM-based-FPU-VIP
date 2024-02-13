@@ -32,7 +32,7 @@ class fpu_monitor extends uvm_monitor;
       forever begin
         item=fpu_sequence_item::type_id::create("item");
         sample(item);
-        `uvm_info(get_name(),"Something is received!!",UVM_MEDIUM)
+        `uvm_info(get_name(),"Item received!!",UVM_HIGH)
         mon_port.write(item);
       end
   endtask
@@ -41,7 +41,7 @@ class fpu_monitor extends uvm_monitor;
   task sample(fpu_sequence_item item);
     //wait(!vif.rst_n);
     @(posedge vif.rdy);
-    @(negedge vif.clk);
+//     @(negedge vif.clk);
     item.cmd=vif.cmd;
     item.din1=vif.din1;
     item.din2=vif.din2;

@@ -1,0 +1,22 @@
+Dashboard
+
+Date: Tue Feb 13 10:27:23 2024
+
+User: unknown
+
+Version: S-2021.09
+Command line: urg -dir simv.vdb -format text 
+
+Number of tests: 1
+
+-------------------------------------------------------------------------------
+Total Coverage Summary 
+SCORE  GROUP  
+100.00 100.00 
+
+
+-------------------------------------------------------------------------------
+Total Groups Coverage Summary 
+SCORE  WEIGHT 
+100.00 1      
+

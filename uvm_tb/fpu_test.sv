@@ -1,7 +1,7 @@
 class fpu_test extends uvm_test;
     `uvm_component_utils(fpu_test)
 
-  	fpu_env env;
+  	fpu_env env; 
   	fpu_rst_seq rst_seq;
     fpu_main_seq main_seq;
 
@@ -31,10 +31,11 @@ class fpu_test extends uvm_test;
         rst_seq=fpu_rst_seq::type_id::create("rst_seq");
         rst_seq.start(env.agent.seqr);
       end
-      repeat(10) begin
+      repeat(`TEST_COUNT) begin
         main_seq=fpu_main_seq::type_id::create("main_seq");
         main_seq.start(env.agent.seqr);
       end
+      wait(env.scb.test_cnt==`TEST_COUNT);
 
       phase.drop_objection(this);
         
